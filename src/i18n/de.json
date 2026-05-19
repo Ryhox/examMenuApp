@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Start",
+    "menu": "Speisekarte",
+    "drinks": "Getränke",
+    "wine": "Weinkarte"
+  },
+  "lang": {
+    "de": "DE",
+    "it": "IT",
+    "en": "EN"
+  },
+  "price": {
+    "glass": "Glas",
+    "bottle": "Flasche"
+  },
+  "allergen": {
+    "label": "Allergene",
+    "A": "Gluten",
+    "B": "Krebstiere",
+    "C": "Eier",
+    "D": "Fisch",
+    "E": "Erdnüsse",
+    "F": "Soja",
+    "G": "Milch",
+    "H": "Nüsse",
+    "L": "Sellerie",
+    "M": "Senf",
+    "N": "Sesam",
+    "O": "Sulfite",
+    "P": "Lupinen",
+    "R": "Weichtiere"
+  },
+  "detail": {
+    "vatNote": "Alle Preise inkl. MwSt."
+  },
+  "menu": {
+    "section": {
+      "coldStarters": "Kalte Vorspeisen",
+      "soups": "Suppen",
+      "warmStarters": "Warme Vorspeisen",
+      "mains": "Hauptspeisen",
+      "kids": "Für unsere Kleinen",
+      "desserts": "Desserts"
+    },
+    "item": {
+      "gemischterSalat": { "name": "Gemischter Salat" },
+      "bretteljause": { "name": "Bretteljause", "desc": "Mit Speck und Käse" },
+      "avokadoTatar": { "name": "Avokado-Tomatentatar", "desc": "Mit Burrata und Wildkräutersalat" },
+      "speckknödelsuppe": { "name": "Speckknödelsuppe" },
+      "spargelcremesuppe": { "name": "Spargelcremesuppe", "desc": "Mit Brotcroutons" },
+      "schlutzkrapfen": { "name": "Hausgemachte Schlutzkrapfen", "desc": "Mit Butter und Reibkäse" },
+      "knoedeltris": { "name": "Knödeltris", "desc": "Mit Butter und Reibkäse" },
+      "tortelloni": { "name": "Hausgemachte Tortelloni", "desc": "Mit Ricottafüllung, Bärlauch und Spargelragout" },
+      "brennesselRisotto": { "name": "Brennessel-Risotto", "desc": "Mit frischem Spargel" },
+      "entrecote": { "name": "Entrecôte vom Rind", "desc": "Mit Kartoffelspalten, gemischtem Salat und Kräuterbutter" },
+      "campedelBurger": { "name": "Campedèl-Burger", "desc": "Mit Fleisch vom eigenen Grauvieh, Speck, Käse und Kartoffelspalten" },
+      "pfeffersteak": { "name": "Pfeffersteak «Campedèl»", "desc": "Medium gebraten mit Röstkartoffeln und gemischtem Salat" },
+      "rindsgulasch": { "name": "Hofeigenes Rindsgulasch", "desc": "Mit zwei Speckknödeln" },
+      "wienerschnitzel": { "name": "Wienerschnitzel vom Hofkalk", "desc": "Mit Pommes frites und Preiselbeermarmelade" },
+      "stangenspargel": { "name": "Frische Stangenspargel", "desc": "Mit Hausschinken, Naturkartoffeln und Bozner Sauce" },
+      "kidsSchnitzel": { "name": "Wienerschnitzel vom Hofkalk", "desc": "Mit Pommes frites" },
+      "spaghetti": { "name": "Spaghetti", "desc": "Mit Tomatensauce oder Ragù" },
+      "grillwurst": { "name": "Grillwurst", "desc": "Mit Pommes" },
+      "pommes": { "name": "Pommes frites" },
+      "buchteln": { "name": "Buchteln", "desc": "Mit Vanillesauce" },
+      "vanilleis": { "name": "Vanilleeis", "desc": "Mit heißen Himbeeren" },
+      "zitronensorbet": { "name": "Zitronensorbet", "desc": "Mit Limoncello" },
+      "apfelstrudel": { "name": "Apfelstrudel", "desc": "Mit Vanillesauce" },
+      "cremeBrulee": { "name": "Crème brûlée", "desc": "Mit frischen Erdbeeren" }
+    }
+  },
+  "drinks": {
+    "section": {
+      "hot": "Warme Getränke",
+      "cold": "Getränke & Säfte",
+      "beer": "Bier",
+      "aperitif": "Aperitif",
+      "digestif": "Digestif"
+    },
+    "item": {
+      "espresso": "Espresso",
+      "macchiato": "Macchiato",
+      "doppio": "Doppelter Espresso",
+      "cappuccino": "Cappuccino",
+      "latteMacchiato": "Latte Macchiato",
+      "heisseSchoko": "Heiße Schokolade",
+      "tee": "Tee",
+      "mineralwasser": "Mineralwasser",
+      "stillesWasser": "Stilles Wasser",
+      "apfelsaft": "Apfelsaft",
+      "skiwasser": "Skiwasser",
+      "himbeersaft": "Himbeersaft",
+      "holundersaft": "Holundersaft",
+      "melissensaft": "Melissensaft",
+      "colasaft": "Colasaft",
+      "kronenForst": "Kronen Forst Bier",
+      "radler": "Radler",
+      "hefeweizen": "Hefeweizen",
+      "alkoholfrei": "Alkoholfreies Bier",
+      "campedeller": "Aperitif Campedeller",
+      "hugo": "Hugo",
+      "veneziano": "Veneziano",
+      "prosecco": "Prosecco",
+      "sanbitter": "Sanbitter Weiß",
+      "ginHendricks": "Gin Tonic Hendrick's",
+      "ginIllusionist": "Gin Tonic Illusionist",
+      "hausschnaps": "Hausschnaps",
+      "latschen": "Latschen",
+      "nusseler": "Nusseler",
+      "zirmschnaps": "Zirmschnaps",
+      "limoncello": "Limoncello",
+      "williams": "Williams",
+      "enzian": "Enzian",
+      "treber": "Treber",
+      "heuschnaps": "Heuschnaps",
+      "brancaMenta": "Branca Menta",
+      "fernetBranca": "Fernet Branca",
+      "cynar": "Cynar",
+      "montenegro": "Montenegro"
+    }
+  },
+  "wine": {
+    "section": {
+      "sparkling": "Sekt & Bollicine",
+      "white": "Weißweine",
+      "red": "Rotweine"
+    },
+    "item": {
+      "arundaBrut": "Arunda Brut",
+      "zemmerMillesimato": "Zemmer Millesimato",
+      "michelstrunkWeiss": "Michelstrunk Weiss",
+      "tCuveeWeiss": "T Cuvée Weiss",
+      "gewurztraminer": "Gewürztraminer",
+      "schulthausPinotBianco": "Schulthaus Pinot Bianco",
+      "sylvaner": "Sylvaner",
+      "kerner": "Kerner",
+      "sauvignon": "Sauvignon",
+      "sanctValentinSauvignon": "Sanct Valentin Sauvignon",
+      "riesling": "Riesling",
+      "fellisChardonnay": "Fellis Chardonnay Riserva",
+      "michelstrunkRot": "Michelstrunk Rot",
+      "zeder": "Zeder",
+      "soma": "Soma",
+      "cabernetRiserva": "Cabernet Riserva",
+      "stMagdalener": "St. Magdalener",
+      "roanZweigelt": "Roan Zweigelt",
+      "pinotNoir": "Pinot Noir",
+      "marithBlauburgunder": "Marith Blauburgunder",
+      "glenBlauburgunder": "Glen Blauburgunder Riserva",
+      "lagrein": "Lagrein",
+      "karlLagreinRiserva": "Karl Lagrein Riserva",
+      "huberfeldMerlot": "Huberfeld Merlot",
+      "terreSanLeonardo": "Terre di San Leonardo",
+      "amarone": "Amarone"
+    }
+  }
+}

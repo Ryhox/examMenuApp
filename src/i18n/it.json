@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menù",
+    "drinks": "Bevande",
+    "wine": "Carta dei Vini"
+  },
+  "lang": {
+    "de": "DE",
+    "it": "IT",
+    "en": "EN"
+  },
+  "price": {
+    "glass": "Calice",
+    "bottle": "Bottiglia"
+  },
+  "allergen": {
+    "label": "Allergeni",
+    "A": "Glutine",
+    "B": "Crostacei",
+    "C": "Uova",
+    "D": "Pesce",
+    "E": "Arachidi",
+    "F": "Soia",
+    "G": "Latte",
+    "H": "Frutta a guscio",
+    "L": "Sedano",
+    "M": "Senape",
+    "N": "Sesamo",
+    "O": "Solfiti",
+    "P": "Lupini",
+    "R": "Molluschi"
+  },
+  "detail": {
+    "vatNote": "Tutti i prezzi IVA inclusa."
+  },
+  "menu": {
+    "section": {
+      "coldStarters": "Antipasti Freddi",
+      "soups": "Zuppe",
+      "warmStarters": "Antipasti Caldi / Primi Piatti",
+      "mains": "Secondi Piatti",
+      "kids": "Per i nostri Piccoli",
+      "desserts": "Dolci"
+    },
+    "item": {
+      "gemischterSalat": { "name": "Insalata mista" },
+      "bretteljause": { "name": "Bretteljause", "desc": "Con speck e formaggio" },
+      "avokadoTatar": { "name": "Tartare avocado e pomodoro", "desc": "Con burrata e insalata di erbe selvatiche" },
+      "speckknödelsuppe": { "name": "Zuppa di canederli allo speck" },
+      "spargelcremesuppe": { "name": "Vellutata di asparagi", "desc": "Con crostini di pane" },
+      "schlutzkrapfen": { "name": "Schlutzkrapfen fatti in casa", "desc": "Con burro e formaggio grattugiato" },
+      "knoedeltris": { "name": "Tris di canederli", "desc": "Con burro e formaggio grattugiato" },
+      "tortelloni": { "name": "Tortelloni fatti in casa", "desc": "Con ricotta, aglio orsino e ragù di asparagi" },
+      "brennesselRisotto": { "name": "Risotto all'ortica", "desc": "Con asparagi freschi" },
+      "entrecote": { "name": "Entrecôte di manzo", "desc": "Con patate, insalata mista e burro alle erbe" },
+      "campedelBurger": { "name": "Burger Campedèl", "desc": "Con carne del proprio Grauvieh, speck, formaggio e patate" },
+      "pfeffersteak": { "name": "Bistecca al pepe «Campedèl»", "desc": "Cottura media con patate arrosto e insalata mista" },
+      "rindsgulasch": { "name": "Gulasch di manzo della fattoria", "desc": "Con due canederli allo speck" },
+      "wienerschnitzel": { "name": "Cotoletta alla viennese", "desc": "Con patatine fritte e marmellata di mirtilli rossi" },
+      "stangenspargel": { "name": "Asparagi freschi", "desc": "Con prosciutto cotto, patate lesse e salsa bolzanina" },
+      "kidsSchnitzel": { "name": "Cotoletta alla viennese", "desc": "Con patatine fritte" },
+      "spaghetti": { "name": "Spaghetti", "desc": "Con salsa di pomodoro o ragù" },
+      "grillwurst": { "name": "Würstel alla griglia", "desc": "Con patatine fritte" },
+      "pommes": { "name": "Patatine fritte" },
+      "buchteln": { "name": "Buchteln", "desc": "Con salsa alla vaniglia" },
+      "vanilleis": { "name": "Gelato alla vaniglia", "desc": "Con lamponi caldi" },
+      "zitronensorbet": { "name": "Sorbetto al limone", "desc": "Con Limoncello" },
+      "apfelstrudel": { "name": "Strudel di mele", "desc": "Con salsa alla vaniglia" },
+      "cremeBrulee": { "name": "Crème brûlée", "desc": "Con fragole fresche" }
+    }
+  },
+  "drinks": {
+    "section": {
+      "hot": "Bevande Calde",
+      "cold": "Bibite & Succhi",
+      "beer": "Birra",
+      "aperitif": "Aperitivi",
+      "digestif": "Digestivi"
+    },
+    "item": {
+      "espresso": "Espresso",
+      "macchiato": "Macchiato",
+      "doppio": "Doppio Espresso",
+      "cappuccino": "Cappuccino",
+      "latteMacchiato": "Latte Macchiato",
+      "heisseSchoko": "Cioccolata calda",
+      "tee": "Tè",
+      "mineralwasser": "Acqua minerale",
+      "stillesWasser": "Acqua naturale",
+      "apfelsaft": "Succo di mela",
+      "skiwasser": "Skiwasser",
+      "himbeersaft": "Succo di lampone",
+      "holundersaft": "Succo di sambuco",
+      "melissensaft": "Succo di melissa",
+      "colasaft": "Cola",
+      "kronenForst": "Kronen Forst Bier",
+      "radler": "Radler",
+      "hefeweizen": "Weizen",
+      "alkoholfrei": "Birra analcolica",
+      "campedeller": "Aperitivo Campedeller",
+      "hugo": "Hugo",
+      "veneziano": "Veneziano",
+      "prosecco": "Prosecco",
+      "sanbitter": "Sanbitter Bianco",
+      "ginHendricks": "Gin Tonic Hendrick's",
+      "ginIllusionist": "Gin Tonic Illusionist",
+      "hausschnaps": "Grappa della casa",
+      "latschen": "Latschen",
+      "nusseler": "Nocino",
+      "zirmschnaps": "Grappa di pino cembro",
+      "limoncello": "Limoncello",
+      "williams": "Williams",
+      "enzian": "Genziana",
+      "treber": "Grappa di vinaccia",
+      "heuschnaps": "Grappa al fieno",
+      "brancaMenta": "Branca Menta",
+      "fernetBranca": "Fernet Branca",
+      "cynar": "Cynar",
+      "montenegro": "Montenegro"
+    }
+  },
+  "wine": {
+    "section": {
+      "sparkling": "Bollicine",
+      "white": "Vini Bianchi",
+      "red": "Vini Rossi"
+    },
+    "item": {
+      "arundaBrut": "Arunda Brut",
+      "zemmerMillesimato": "Zemmer Millesimato",
+      "michelstrunkWeiss": "Michelstrunk Weiss",
+      "tCuveeWeiss": "T Cuvée Weiss",
+      "gewurztraminer": "Gewürztraminer",
+      "schulthausPinotBianco": "Schulthaus Pinot Bianco",
+      "sylvaner": "Sylvaner",
+      "kerner": "Kerner",
+      "sauvignon": "Sauvignon",
+      "sanctValentinSauvignon": "Sanct Valentin Sauvignon",
+      "riesling": "Riesling",
+      "fellisChardonnay": "Fellis Chardonnay Riserva",
+      "michelstrunkRot": "Michelstrunk Rot",
+      "zeder": "Zeder",
+      "soma": "Soma",
+      "cabernetRiserva": "Cabernet Riserva",
+      "stMagdalener": "St. Magdalener",
+      "roanZweigelt": "Roan Zweigelt",
+      "pinotNoir": "Pinot Noir",
+      "marithBlauburgunder": "Marith Blauburgunder",
+      "glenBlauburgunder": "Glen Blauburgunder Riserva",
+      "lagrein": "Lagrein",
+      "karlLagreinRiserva": "Karl Lagrein Riserva",
+      "huberfeldMerlot": "Huberfeld Merlot",
+      "terreSanLeonardo": "Terre di San Leonardo",
+      "amarone": "Amarone"
+    }
+  }
+}
