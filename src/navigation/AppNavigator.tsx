@@ -13,6 +13,7 @@ import MenuScreen from '../screens/MenuScreen';
 import DrinksScreen from '../screens/DrinksScreen';
 import WineScreen from '../screens/WineScreen';
 import ItemDetailScreen from '../screens/ItemDetailScreen';
+import * as Haptics from 'expo-haptics';
 import { Colors, Radius } from '../theme';
 
 export type RootStackParamList = {
@@ -68,6 +69,7 @@ function CustomTabBar({ state, navigation }: BottomTabBarProps) {
             canPreventDefault: true,
           });
           if (!isFocused && !event.defaultPrevented) {
+            Haptics.selectionAsync();
             navigation.navigate(route.name);
           }
         };
@@ -97,11 +99,17 @@ function CustomTabBar({ state, navigation }: BottomTabBarProps) {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
 
+const MODAL_OPTIONS = {
+  presentation: 'modal' as const,
+  gestureEnabled: true,
+  headerShown: false,
+};
+
 function HomeStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
       <Stack.Screen name="HomeMain" component={HomeScreen} />
-      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} />
+      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} options={MODAL_OPTIONS} />
     </Stack.Navigator>
   );
 }
@@ -110,7 +118,7 @@ function MenuStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
       <Stack.Screen name="MenuMain" component={MenuScreen} />
-      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} />
+      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} options={MODAL_OPTIONS} />
     </Stack.Navigator>
   );
 }
@@ -119,7 +127,7 @@ function DrinksStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
       <Stack.Screen name="DrinksMain" component={DrinksScreen} />
-      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} />
+      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} options={MODAL_OPTIONS} />
     </Stack.Navigator>
   );
 }
@@ -128,7 +136,7 @@ function WineStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
       <Stack.Screen name="WineMain" component={WineScreen} />
-      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} />
+      <Stack.Screen name="ItemDetail" component={ItemDetailScreen} options={MODAL_OPTIONS} />
     </Stack.Navigator>
   );
 }

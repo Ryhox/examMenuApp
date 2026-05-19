@@ -14,7 +14,24 @@
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\emanu\\\\Documents\\\\GitHub\\\\SpeisekarteApp\" -Recurse -Include \"*.tsx\", \"*.ts\", \"*.jsx\", \"*.js\" -Exclude \"node_modules\")",
       "Bash(Select-Object -First 50)",
       "PowerShell(ls *)",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emanu\\\\Documents\\\\GitHub\\\\SpeisekarteApp\\\\src\" -Recurse | ForEach-Object { $_.FullName })"
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emanu\\\\Documents\\\\GitHub\\\\SpeisekarteApp\\\\src\" -Recurse | ForEach-Object { $_.FullName })",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in {**d.get\\('dependencies',{}\\), **d.get\\('devDependencies',{}\\)}.items\\(\\) if 'expo' in k.lower\\(\\) or 'image' in k.lower\\(\\)]\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); const d={...p.dependencies,...p.devDependencies}; Object.entries\\(d\\).filter\\(\\([k]\\)=>k.includes\\('expo'\\)||k.includes\\('image'\\)\\).forEach\\(\\([k,v]\\)=>console.log\\(k,v\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\(p.dependencies['expo-image']\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); const d={...p.dependencies,...p.devDependencies}; Object.entries\\(d\\).filter\\(\\([k]\\)=>k.includes\\('navigation'\\)||k.includes\\('react-native-screens'\\)\\).forEach\\(\\([k,v]\\)=>console.log\\(k,v\\)\\)\")",
+      "Bash(node -e \"const db = require\\('./db'\\); const rows = db.prepare\\('SELECT id, category_key FROM menu_sections UNION ALL SELECT id, category_key FROM drink_sections'\\).all\\(\\); console.log\\(JSON.stringify\\(rows, null, 2\\)\\)\")",
+      "Bash(curl -s \"https://api-campedel.pokyh.com/menu\")",
+      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\); const j=JSON.parse\\(d\\); console.log\\(j.map\\(s=>\\({id:s.id,categoryKey:s.categoryKey}\\)\\)\\)\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(s['id'], s.get\\('categoryKey',''\\)\\) for s in d]\")",
+      "Bash(node -e \"process.stdin.resume\\(\\);let d='';process.stdin.on\\('data',c=>d+=c\\);process.stdin.on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);j.forEach\\(s=>console.log\\(s.id,'|',s.categoryKey\\)\\)}\\)\")",
+      "Bash(curl -s \"https://api-campedel.pokyh.com/api/menu\")",
+      "Bash(node -e \"process.stdin.resume\\(\\);let d='';process.stdin.on\\('data',c=>d+=c\\);process.stdin.on\\('end',\\(\\)=>{try{const j=JSON.parse\\(d\\);j.forEach\\(s=>console.log\\(s.id,'|',s.categoryKey\\)\\)}catch\\(e\\){console.log\\('raw:',d.substring\\(0,200\\)\\)}}\\)\")",
+      "Bash(curl -s \"https://api-campedel.pokyh.com/api/drinks\")",
+      "Bash(node -e \"const db = require\\('./db/database'\\); const rows = db.prepare\\('SELECT id, category_key FROM menu_sections'\\).all\\(\\); console.log\\('MENU:', JSON.stringify\\(rows\\)\\); const rows2 = db.prepare\\('SELECT id, category_key FROM drink_sections'\\).all\\(\\); console.log\\('DRINKS:', JSON.stringify\\(rows2\\)\\);\")",
+      "Bash(node -e \"const {getDb}=require\\('./db/database'\\);const db=getDb\\(\\);console.log\\('MENU:',JSON.stringify\\(db.prepare\\('SELECT id,category_key FROM menu_sections'\\).all\\(\\)\\)\\);console.log\\('DRINKS:',JSON.stringify\\(db.prepare\\('SELECT id,category_key FROM drink_sections'\\).all\\(\\)\\)\\);\")",
+      "Bash(node scripts/seedDrinksAndWineEN.js)",
+      "Bash(node -e ' *)",
+      "PowerShell(Get-ChildItem C:\\\\Users\\\\emanu\\\\Documents\\\\GitHub\\\\campedel-backend | Where-Object { $_.Name -ne 'node_modules' } | Select-Object Name, PSIsContainer)"
     ]
   }
 }

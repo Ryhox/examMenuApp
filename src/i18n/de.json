@@ -1,4 +1,16 @@
 {
+  "header": {
+    "sub": "Welschnofen · Südtirol"
+  },
+  "home": {
+    "sectionTitle": "Unsere Karten",
+    "about": "Hausgemachte Südtiroler Spezialitäten, liebevoll zubereitet mit frischen Produkten vom eigenen Bauernhof.",
+    "count": {
+      "menu": "{{secs}} Gänge · {{items}} Gerichte",
+      "drinks": "{{secs}} Kategorien · {{items}} Getränke",
+      "wine": "{{secs}} Kategorien · {{items}} Weine"
+    }
+  },
   "nav": {
     "home": "Start",
     "menu": "Speisekarte",
@@ -12,7 +24,12 @@
   },
   "price": {
     "glass": "Glas",
-    "bottle": "Flasche"
+    "bottle": "Flasche",
+    "carafe": "Karaffe"
+  },
+  "badge": {
+    "vegan": "Vegan",
+    "vegetarian": "Vegetarisch"
   },
   "allergen": {
     "label": "Allergene",
@@ -31,11 +48,24 @@
     "P": "Lupinen",
     "R": "Weichtiere"
   },
+  "search": {
+    "empty": "Keine Ergebnisse für {{query}}"
+  },
   "detail": {
-    "vatNote": "Alle Preise inkl. MwSt."
+    "vatNote": "Alle Preise inkl. MwSt.",
+    "sizes": "Größen / Optionen",
+    "grapes": "Rebsorten",
+    "restaurant": "Restaurant",
+    "price": "Preis",
+    "notFound": "Nicht gefunden",
+    "winery": "Weingut",
+    "region": "Region",
+    "doc": "DOC / IGT",
+    "style": "Stil"
   },
   "menu": {
     "section": {
+      "starters": "Vorspeisen",
       "coldStarters": "Kalte Vorspeisen",
       "soups": "Suppen",
       "warmStarters": "Warme Vorspeisen",
@@ -72,10 +102,15 @@
   },
   "drinks": {
     "section": {
+      "hotDrinks": "Warme Getränke",
       "hot": "Warme Getränke",
+      "drinks": "Getränke & Säfte",
       "cold": "Getränke & Säfte",
+      "homemadeJuices": "Hausgemachte Säfte",
       "beer": "Bier",
+      "aperitifs": "Aperitifs",
       "aperitif": "Aperitif",
+      "digestifs": "Digestifs",
       "digestif": "Digestif"
     },
     "item": {
@@ -121,6 +156,12 @@
     }
   },
   "wine": {
+    "dryness": {
+      "trocken": "trocken",
+      "halbtrocken": "halbtrocken",
+      "lieblich": "lieblich",
+      "süß": "süß"
+    },
     "section": {
       "sparkling": "Sekt & Bollicine",
       "white": "Weißweine",

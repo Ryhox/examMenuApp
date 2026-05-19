@@ -1,4 +1,16 @@
 {
+  "header": {
+    "sub": "Nova Levante · Alto Adige"
+  },
+  "home": {
+    "sectionTitle": "Le nostre Carte",
+    "about": "Specialità tradizionali fatte in casa, preparate con amore utilizzando i prodotti freschi del nostro maso.",
+    "count": {
+      "menu": "{{secs}} sezioni · {{items}} piatti",
+      "drinks": "{{secs}} categorie · {{items}} bevande",
+      "wine": "{{secs}} categorie · {{items}} vini"
+    }
+  },
   "nav": {
     "home": "Home",
     "menu": "Menù",
@@ -12,7 +24,12 @@
   },
   "price": {
     "glass": "Calice",
-    "bottle": "Bottiglia"
+    "bottle": "Bottiglia",
+    "carafe": "Caraffa"
+  },
+  "badge": {
+    "vegan": "Vegano",
+    "vegetarian": "Vegetariano"
   },
   "allergen": {
     "label": "Allergeni",
@@ -31,11 +48,24 @@
     "P": "Lupini",
     "R": "Molluschi"
   },
+  "search": {
+    "empty": "Nessun risultato per {{query}}"
+  },
   "detail": {
-    "vatNote": "Tutti i prezzi IVA inclusa."
+    "vatNote": "Tutti i prezzi IVA inclusa.",
+    "sizes": "Formati / Opzioni",
+    "grapes": "Vitigni",
+    "restaurant": "Ristorante",
+    "price": "Prezzo",
+    "notFound": "Non trovato",
+    "winery": "Cantina",
+    "region": "Regione",
+    "doc": "DOC / IGT",
+    "style": "Stile"
   },
   "menu": {
     "section": {
+      "starters": "Antipasti",
       "coldStarters": "Antipasti Freddi",
       "soups": "Zuppe",
       "warmStarters": "Antipasti Caldi / Primi Piatti",
@@ -72,10 +102,15 @@
   },
   "drinks": {
     "section": {
+      "hotDrinks": "Bevande Calde",
       "hot": "Bevande Calde",
+      "drinks": "Bibite & Succhi",
       "cold": "Bibite & Succhi",
+      "homemadeJuices": "Succhi artigianali",
       "beer": "Birra",
+      "aperitifs": "Aperitivi",
       "aperitif": "Aperitivi",
+      "digestifs": "Digestivi",
       "digestif": "Digestivi"
     },
     "item": {
@@ -121,6 +156,12 @@
     }
   },
   "wine": {
+    "dryness": {
+      "trocken": "secco",
+      "halbtrocken": "abboccato",
+      "lieblich": "amabile",
+      "süß": "dolce"
+    },
     "section": {
       "sparkling": "Bollicine",
       "white": "Vini Bianchi",

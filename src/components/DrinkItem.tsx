@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { DrinkItem as DrinkItemType, PriceVariants } from '../data/types';
 import type { RootStackParamList } from '../navigation/AppNavigator';
-import { formatPrice, formatPriceVariants } from '../utils/formatPrice';
+import { formatPrice } from '../utils/formatPrice';
 import AllergenBadges from './AllergenBadges';
 import { Colors, Spacing, Radius } from '../theme';
 
@@ -53,7 +53,10 @@ export default function DrinkItem({ item, navigation, sectionId }: Props) {
         <Text style={styles.name}>{name}</Text>
         {!isFlat && (
           <Text style={styles.variants}>
-            {formatPriceVariants(item.prices as PriceVariants, t('price.glass'))}
+            {Object.entries(item.prices as PriceVariants)
+              .filter(([, v]) => v !== undefined)
+              .map(([k, v]) => `${k} ${formatPrice(v as number)}`)
+              .join(' · ')}
           </Text>
         )}
         <AllergenBadges allergens={item.allergens} />

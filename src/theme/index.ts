@@ -1,3 +1,14 @@
+import { Dimensions } from 'react-native';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const CARD_GAP = 12;
+const CARDS_VISIBLE = 2.3;
+
+// Responsive: always shows 2 full cards + ~30% peek of the 3rd, on any screen size
+export const CARD_WIDTH = Math.floor(
+  (SCREEN_WIDTH - 20 - (CARDS_VISIBLE - 1) * CARD_GAP) / CARDS_VISIBLE
+);
+
 export const Colors = {
   background: '#F9F6F3',
   surface: '#FFFFFF',

@@ -8,6 +8,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import AppNavigator from './src/navigation/AppNavigator';
+import { DataProvider } from './src/context/DataContext';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -51,9 +52,11 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <StatusBar style="dark" backgroundColor="#F9F6F3" />
-        {ready && <AppNavigator />}
-        {ready && !splashDone && <InAppSplash onDone={() => setSplashDone(true)} />}
+        <DataProvider>
+          <StatusBar style="dark" backgroundColor="#F9F6F3" />
+          {ready && <AppNavigator />}
+          {ready && !splashDone && <InAppSplash onDone={() => setSplashDone(true)} />}
+        </DataProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

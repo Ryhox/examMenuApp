@@ -1,4 +1,16 @@
 {
+  "header": {
+    "sub": "Nova Levante · South Tyrol"
+  },
+  "home": {
+    "sectionTitle": "Our Menus",
+    "about": "Homemade South Tyrolean specialties, lovingly prepared with fresh products from our own farm.",
+    "count": {
+      "menu": "{{secs}} courses · {{items}} dishes",
+      "drinks": "{{secs}} categories · {{items}} drinks",
+      "wine": "{{secs}} categories · {{items}} wines"
+    }
+  },
   "nav": {
     "home": "Home",
     "menu": "Menu",
@@ -12,7 +24,12 @@
   },
   "price": {
     "glass": "Glass",
-    "bottle": "Bottle"
+    "bottle": "Bottle",
+    "carafe": "Carafe"
+  },
+  "badge": {
+    "vegan": "Vegan",
+    "vegetarian": "Vegetarian"
   },
   "allergen": {
     "label": "Allergens",
@@ -31,11 +48,24 @@
     "P": "Lupin",
     "R": "Molluscs"
   },
+  "search": {
+    "empty": "No results for {{query}}"
+  },
   "detail": {
-    "vatNote": "All prices include VAT."
+    "vatNote": "All prices include VAT.",
+    "sizes": "Sizes / Options",
+    "grapes": "Grape Varieties",
+    "restaurant": "Restaurant",
+    "price": "Price",
+    "notFound": "Not found",
+    "winery": "Winery",
+    "region": "Region",
+    "doc": "DOC / IGT",
+    "style": "Style"
   },
   "menu": {
     "section": {
+      "starters": "Starters",
       "coldStarters": "Cold Starters",
       "soups": "Soups",
       "warmStarters": "Warm Starters",
@@ -72,10 +102,15 @@
   },
   "drinks": {
     "section": {
+      "hotDrinks": "Hot Drinks",
       "hot": "Hot Drinks",
+      "drinks": "Soft Drinks & Juices",
       "cold": "Soft Drinks & Juices",
+      "homemadeJuices": "Homemade Juices",
       "beer": "Beer",
+      "aperitifs": "Aperitifs",
       "aperitif": "Aperitifs",
+      "digestifs": "Digestifs",
       "digestif": "Digestifs"
     },
     "item": {
@@ -121,6 +156,12 @@
     }
   },
   "wine": {
+    "dryness": {
+      "trocken": "dry",
+      "halbtrocken": "off-dry",
+      "lieblich": "medium-sweet",
+      "süß": "sweet"
+    },
     "section": {
       "sparkling": "Sparkling Wines",
       "white": "White Wines",

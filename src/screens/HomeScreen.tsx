@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import AppHeader from '../components/AppHeader';
 import PromoCard from '../components/PromoCard';
+import { useData } from '../context/DataContext';
 import { Colors, Spacing, Radius } from '../theme';
 
 type TabParamList = {
@@ -18,99 +19,97 @@ type Nav = BottomTabNavigationProp<TabParamList>;
 
 type IoniconName = React.ComponentProps<typeof Ionicons>['name'];
 
-const SECTION_TITLE: Record<string, string> = {
-  de: 'Unsere Karten',
-  it: 'Le nostre Carte',
-  en: 'Our Menus',
-};
-
-const ABOUT_TEXT: Record<string, string> = {
-  de: 'Hausgemachte Südtiroler Spezialitäten, liebevoll zubereitet mit frischen Produkten vom eigenen Bauernhof.',
-  it: 'Specialità tradizionali fatte in casa, preparate con amore utilizzando i prodotti freschi del nostro maso.',
-  en: 'Homemade South Tyrolean specialties, lovingly prepared with fresh products from our own farm.',
-};
-
 interface Category {
   tab: keyof TabParamList;
   icon: IoniconName;
-  bg: string;
   labelKey: string;
-  sub: Record<string, string>;
+  countKey: string;
+  getCounts: (data: ReturnType<typeof useData>) => { secs: number; items: number } | null;
 }
 
 const CATEGORIES: Category[] = [
   {
     tab: 'Menu',
     icon: 'restaurant-outline',
-    bg: Colors.accentPale,
     labelKey: 'nav.menu',
-    sub: { de: '6 Gänge · 27 Gerichte', it: '6 portate · 27 piatti', en: '6 courses · 27 dishes' },
+    countKey: 'home.count.menu',
+    getCounts: d => {
+      const secs = d.menu.length;
+      const items = d.menu.reduce((n, s) => n + s.items.length, 0);
+      return items > 0 ? { secs, items } : null;
+    },
   },
   {
     tab: 'Drinks',
     icon: 'cafe-outline',
-    bg: Colors.accentPale,
     labelKey: 'nav.drinks',
-    sub: { de: '5 Kategorien · 34 Getränke', it: '5 categorie · 34 bevande', en: '5 categories · 34 drinks' },
+    countKey: 'home.count.drinks',
+    getCounts: d => {
+      const secs = d.drinks.length;
+      const items = d.drinks.reduce((n, s) => n + s.items.length, 0);
+      return items > 0 ? { secs, items } : null;
+    },
   },
   {
     tab: 'Wine',
     icon: 'wine-outline',
-    bg: Colors.accentPale,
     labelKey: 'nav.wine',
-    sub: { de: 'Südtiroler Auslese · 26 Weine', it: 'Selezione locale · 26 vini', en: 'Local selection · 26 wines' },
+    countKey: 'home.count.wine',
+    getCounts: d => {
+      const secs = d.wines.length;
+      const items = d.wines.reduce((n, s) => n + s.wines.length, 0);
+      return items > 0 ? { secs, items } : null;
+    },
   },
 ];
 
 export default function HomeScreen() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigation = useNavigation<Nav>();
-  const lang = i18n.language;
+  const data = useData();
 
   return (
     <View style={styles.screen}>
       <AppHeader />
-    <ScrollView
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-      contentInsetAdjustmentBehavior="never"
-    >
-      <PromoCard />
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="never"
+      >
+        <PromoCard />
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>
-          {SECTION_TITLE[lang] ?? SECTION_TITLE.de}
-        </Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t('home.sectionTitle')}</Text>
 
-        {CATEGORIES.map((cat) => (
-          <TouchableOpacity
-            key={cat.tab}
-            style={styles.navCard}
-            onPress={() => navigation.navigate(cat.tab)}
-            activeOpacity={0.75}
-          >
-            <View style={[styles.iconBox, { backgroundColor: cat.bg }]}>
-              <Ionicons name={cat.icon} size={26} color={Colors.accent} />
-            </View>
-            <View style={styles.navInfo}>
-              <Text style={styles.navTitle}>{t(cat.labelKey)}</Text>
-              <Text style={styles.navSub}>
-                {cat.sub[lang] ?? cat.sub.de}
-              </Text>
-            </View>
-            <Ionicons name="chevron-forward" size={18} color={Colors.border} />
-          </TouchableOpacity>
-        ))}
-      </View>
+          {CATEGORIES.map(cat => {
+            const counts = cat.getCounts(data);
+            const sub = counts ? t(cat.countKey, counts) : '…';
+            return (
+              <TouchableOpacity
+                key={cat.tab}
+                style={styles.navCard}
+                onPress={() => navigation.navigate(cat.tab)}
+                activeOpacity={0.75}
+              >
+                <View style={[styles.iconBox, { backgroundColor: Colors.accentPale }]}>
+                  <Ionicons name={cat.icon} size={26} color={Colors.accent} />
+                </View>
+                <View style={styles.navInfo}>
+                  <Text style={styles.navTitle}>{t(cat.labelKey)}</Text>
+                  <Text style={styles.navSub}>{sub}</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={Colors.border} />
+              </TouchableOpacity>
+            );
+          })}
+        </View>
 
-      <View style={styles.aboutSection}>
-        <Text style={styles.aboutText}>
-          {ABOUT_TEXT[lang] ?? ABOUT_TEXT.de}
-        </Text>
-      </View>
+        <View style={styles.aboutSection}>
+          <Text style={styles.aboutText}>{t('home.about')}</Text>
+        </View>
 
-      <View style={styles.bottomPad} />
-    </ScrollView>
+        <View style={styles.bottomPad} />
+      </ScrollView>
     </View>
   );
 }

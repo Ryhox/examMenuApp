@@ -1,62 +1,63 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { useTranslation } from 'react-i18next';
+import * as Haptics from 'expo-haptics';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { WineItem } from '../data/types';
+import type { ApiWineItem } from '../services/api';
+import { resolveImageUrl } from '../services/api';
 import type { RootStackParamList } from '../navigation/AppNavigator';
-import { formatPrice, formatPriceVariants } from '../utils/formatPrice';
-import { Colors, Radius } from '../theme';
-
-const SECTION_COLORS: Record<string, string> = {
-  sparkling: Colors.accentPale,
-  white: Colors.accentPale,
-  red: Colors.accentPale,
-};
+import { formatPrice } from '../utils/formatPrice';
+import { Colors, Radius, CARD_WIDTH } from '../theme';
 
 interface Props {
-  item: WineItem;
+  item: ApiWineItem;
   navigation: NativeStackNavigationProp<RootStackParamList>;
   sectionId?: string;
 }
 
-export default function WineCard({ item, navigation, sectionId }: Props) {
-  const { t } = useTranslation();
-  const name = t(item.nameKey);
-  const iconBg = (sectionId ? SECTION_COLORS[sectionId] : undefined) ?? Colors.accentPale;
+export default function WineCard({ item, navigation }: Props) {
+  const imgUri = resolveImageUrl(item.imageUrl);
 
-  const bottlePrices = { ...item.prices };
-  delete (bottlePrices as any).glass;
-  const hasBottle = Object.keys(bottlePrices).length > 0;
-
-  let priceDisplay: string;
-  if (hasBottle) {
-    priceDisplay = formatPriceVariants(bottlePrices, t('price.bottle'));
-  } else if (item.prices.glass !== undefined) {
-    priceDisplay = `${t('price.glass')} ${formatPrice(item.prices.glass)}`;
-  } else {
-    priceDisplay = '—';
+  const priceEntries = Object.entries(item.prices).filter(([, v]) => v != null) as [string, number][];
+  let priceDisplay = '—';
+  if (priceEntries.length > 0) {
+    const labels: Record<string, string> = { bottle: 'Fl.', glass: 'Gl.', carafe: 'Kf.' };
+    priceDisplay = priceEntries
+      .map(([k, v]) => `${labels[k] ?? k} ${formatPrice(v)}`)
+      .join('  ');
   }
 
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate('ItemDetail', { itemId: item.id, category: 'wine' })}
+      onPress={() => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        navigation.navigate('ItemDetail', { itemId: item.id, category: 'wine' });
+      }}
       activeOpacity={0.8}
     >
-      <View style={[styles.imageArea, { backgroundColor: iconBg }]}>
-        <Ionicons name="wine-outline" size={46} color={Colors.accent} />
+      <View style={styles.imageArea}>
+        {imgUri ? (
+          <Image
+            source={imgUri}
+            style={styles.image}
+            contentFit="cover"
+            transition={200}
+            cachePolicy="memory-disk"
+          />
+        ) : (
+          <Ionicons name="wine-outline" size={46} color={Colors.accent} />
+        )}
       </View>
-      <Text style={styles.name} numberOfLines={2}>{name}</Text>
-      <Text style={styles.subtitle} numberOfLines={1}>{item.producer}</Text>
+      <Text style={styles.name} numberOfLines={2}>{item.name}</Text>
+      <Text style={styles.subtitle} numberOfLines={1}>{item.winery}</Text>
       <View style={styles.footer}>
         <Text style={styles.price} numberOfLines={1}>{priceDisplay}</Text>
       </View>
     </TouchableOpacity>
   );
 }
-
-const CARD_WIDTH = 158;
 
 const styles = StyleSheet.create({
   card: {
@@ -74,9 +75,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 114,
     borderRadius: Radius.md,
+    backgroundColor: Colors.accentPale,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
   name: {
     fontSize: 14,
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   price: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '700',
     color: Colors.accent,
     textAlign: 'right',

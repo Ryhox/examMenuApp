@@ -1,12 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { DrinkItem, PriceVariants } from '../data/types';
+import type { ApiDrinkItem } from '../services/api';
+import { resolveImageUrl, localName, parseDrinkPrices } from '../services/api';
 import type { RootStackParamList } from '../navigation/AppNavigator';
 import { formatPrice } from '../utils/formatPrice';
-import { Colors, Radius } from '../theme';
+import { Colors, Radius, CARD_WIDTH } from '../theme';
 
 type IoniconName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -18,43 +21,55 @@ const SECTION_ICONS: Record<string, IoniconName> = {
   'digestif': 'flask-outline',
 };
 
-const SECTION_COLORS: Record<string, string> = {
-  'hot-drinks': Colors.accentPale,
-  'soft-drinks': Colors.accentPale,
-  'beer': Colors.accentPale,
-  'aperitif': Colors.accentPale,
-  'digestif': Colors.accentPale,
-};
-
 interface Props {
-  item: DrinkItem;
+  item: ApiDrinkItem;
   navigation: NativeStackNavigationProp<RootStackParamList>;
   sectionId?: string;
+  sectionIcon?: string;
 }
 
-export default function DrinkCard({ item, navigation, sectionId }: Props) {
-  const { t } = useTranslation();
-  const name = t(item.nameKey);
-  const iconName: IoniconName = (sectionId ? SECTION_ICONS[sectionId] : undefined) ?? 'cafe-outline';
-  const iconBg = (sectionId ? SECTION_COLORS[sectionId] : undefined) ?? Colors.accentPale;
+export default function DrinkCard({ item, navigation, sectionId, sectionIcon }: Props) {
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
+  const name = localName(item.name, lang);
+  const imgUri = resolveImageUrl(item.imageUrl);
+  const iconName: IoniconName =
+    (sectionId ? SECTION_ICONS[sectionId] : undefined) ??
+    (sectionIcon as IoniconName | undefined) ??
+    'cafe-outline';
 
+  const prices = parseDrinkPrices(item.prices);
   let priceDisplay: string;
-  if (typeof item.prices === 'number') {
-    priceDisplay = formatPrice(item.prices);
+  if (prices.length === 0) {
+    priceDisplay = '—';
+  } else if (prices.length === 1) {
+    priceDisplay = formatPrice(prices[0].price);
   } else {
-    const vals = Object.values(item.prices as PriceVariants).filter(Boolean) as number[];
-    const min = Math.min(...vals);
+    const min = Math.min(...prices.map(p => p.price));
     priceDisplay = `ab ${formatPrice(min)}`;
   }
 
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate('ItemDetail', { itemId: item.id, category: 'drinks' })}
+      onPress={() => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        navigation.navigate('ItemDetail', { itemId: item.id, category: 'drinks' });
+      }}
       activeOpacity={0.8}
     >
-      <View style={[styles.imageArea, { backgroundColor: iconBg }]}>
-        <Ionicons name={iconName} size={46} color={Colors.accent} />
+      <View style={styles.imageArea}>
+        {imgUri ? (
+          <Image
+            source={imgUri}
+            style={styles.image}
+            contentFit="cover"
+            transition={200}
+            cachePolicy="memory-disk"
+          />
+        ) : (
+          <Ionicons name={iconName} size={46} color={Colors.accent} />
+        )}
       </View>
       <Text style={styles.name} numberOfLines={2}>{name}</Text>
       <View style={styles.footer}>
@@ -63,8 +78,6 @@ export default function DrinkCard({ item, navigation, sectionId }: Props) {
     </TouchableOpacity>
   );
 }
-
-const CARD_WIDTH = 158;
 
 const styles = StyleSheet.create({
   card: {
@@ -82,9 +95,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 114,
     borderRadius: Radius.md,
+    backgroundColor: Colors.accentPale,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
   name: {
     fontSize: 14,

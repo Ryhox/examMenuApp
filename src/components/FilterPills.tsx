@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { Colors, Spacing, Radius } from '../theme';
 
@@ -20,6 +21,11 @@ export default function FilterPills({ pills, active, onPress }: Props) {
   const { i18n } = useTranslation();
   const allLabel = ALL_LABELS[i18n.language] ?? 'All';
 
+  const handlePress = (id: string | null) => {
+    Haptics.selectionAsync();
+    onPress(id);
+  };
+
   return (
     <ScrollView
       horizontal
@@ -29,8 +35,8 @@ export default function FilterPills({ pills, active, onPress }: Props) {
     >
       <TouchableOpacity
         style={[styles.pill, !active && styles.pillActive]}
-        onPress={() => onPress(null)}
-        activeOpacity={0.75}
+        onPress={() => handlePress(null)}
+        activeOpacity={0.7}
       >
         <Text style={[styles.label, !active && styles.labelActive]}>{allLabel}</Text>
       </TouchableOpacity>
@@ -38,8 +44,8 @@ export default function FilterPills({ pills, active, onPress }: Props) {
         <TouchableOpacity
           key={p.id}
           style={[styles.pill, active === p.id && styles.pillActive]}
-          onPress={() => onPress(p.id)}
-          activeOpacity={0.75}
+          onPress={() => handlePress(p.id)}
+          activeOpacity={0.7}
         >
           <Text style={[styles.label, active === p.id && styles.labelActive]}>{p.label}</Text>
         </TouchableOpacity>
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
   },
   pillActive: {
     backgroundColor: Colors.accentPale,
-    borderColor: Colors.accentPale,
+    borderColor: Colors.accent,
   },
   label: {
     fontSize: 13,

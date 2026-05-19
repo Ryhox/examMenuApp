@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { WineItem as WineItemType } from '../data/types';
 import type { RootStackParamList } from '../navigation/AppNavigator';
-import { formatPrice, formatPriceVariants } from '../utils/formatPrice';
+import { formatPrice } from '../utils/formatPrice';
 import AllergenBadges from './AllergenBadges';
 import { Colors, Spacing, Radius } from '../theme';
 
@@ -48,7 +48,7 @@ export default function WineItem({ item, navigation, sectionId }: Props) {
       <View style={styles.priceCol}>
         {hasBottle && (
           <Text style={styles.priceMain}>
-            {formatPriceVariants(bottlePrices, t('price.bottle'))}
+            {Object.entries(bottlePrices).filter(([,v])=>v!==undefined).map(([k,v])=>`${k} ${formatPrice(v as number)}`).join(' · ')}
           </Text>
         )}
         {glassPrice !== undefined && (

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, TextInput, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
-import { drinkSections } from '../data/drinks';
+import { useData } from '../context/DataContext';
+import { localName } from '../services/api';
 import type { RootStackParamList } from '../navigation/AppNavigator';
 import AppHeader from '../components/AppHeader';
 import DrinkCard from '../components/DrinkCard';
 import SortDropdown from '../components/SortDropdown';
+import HorizontalFadeScroll from '../components/HorizontalFadeScroll';
 import { Colors, Spacing, Radius } from '../theme';
 
 type Nav = NativeStackNavigationProp<RootStackParamList>;
@@ -27,24 +29,25 @@ export default function DrinksScreen() {
   const lang = i18n.language;
   const [activeFilter, setActiveFilter] = useState('');
   const [search, setSearch] = useState('');
+  const { drinks, loading, error } = useData();
 
   const filterOptions = [
     { id: '', label: ALL_LABEL[lang] ?? 'Alle' },
-    ...drinkSections.map((s) => ({ id: s.id, label: t(s.titleKey) })),
+    ...drinks.map(s => ({ id: s.id, label: t(`drinks.section.${s.id}`, { defaultValue: s.categoryKey }) })),
   ];
 
-  const allSections = drinkSections.map((s) => {
+  const allSections = drinks.map(s => {
     let items = s.items;
     if (search) {
       items = items.filter(item =>
-        t(item.nameKey).toLowerCase().includes(search.toLowerCase())
+        localName(item.name, lang).toLowerCase().includes(search.toLowerCase())
       );
     }
-    return { id: s.id, title: t(s.titleKey), data: items };
+    return { id: s.id, title: t(`drinks.section.${s.id}`, { defaultValue: s.categoryKey }), data: items, icon: s.icon };
   }).filter(s => s.data.length > 0);
 
   const sections = activeFilter
-    ? allSections.filter((s) => s.id === activeFilter)
+    ? allSections.filter(s => s.id === activeFilter)
     : allSections;
 
   return (
@@ -55,14 +58,13 @@ export default function DrinksScreen() {
         style={styles.container}
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="never"
-
+        keyboardDismissMode="on-drag"
       >
         <View style={styles.toolbar}>
           <View style={styles.headerRow}>
             <Text style={styles.pageTitle}>{t('nav.drinks')}</Text>
             <SortDropdown options={filterOptions} value={activeFilter} onChange={setActiveFilter} />
           </View>
-
           <View style={styles.searchRow}>
             <Ionicons name="search-outline" size={18} color={Colors.textSecondary} />
             <TextInput
@@ -71,6 +73,7 @@ export default function DrinksScreen() {
               placeholderTextColor="#C8BFB9"
               value={search}
               onChangeText={setSearch}
+              returnKeyType="search"
             />
             {search.length > 0 && (
               <TouchableOpacity onPress={() => setSearch('')} activeOpacity={0.75}>
@@ -79,25 +82,39 @@ export default function DrinksScreen() {
             )}
           </View>
         </View>
-        {sections.map((section) => (
-          <View key={section.id} style={styles.sectionBlock}>
-            <Text style={styles.sectionTitle}>{section.title}</Text>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.cardsRow}
-            >
-              {section.data.map((item) => (
-                <DrinkCard
-                  key={item.id}
-                  item={item}
-                  navigation={navigation}
-                  sectionId={section.id}
-                />
-              ))}
-            </ScrollView>
+
+        {loading && drinks.length === 0 ? (
+          <View style={styles.center}>
+            <ActivityIndicator size="large" color={Colors.accent} />
           </View>
-        ))}
+        ) : error && drinks.length === 0 ? (
+          <View style={styles.center}>
+            <Ionicons name="cloud-offline-outline" size={40} color={Colors.textSecondary} />
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+        ) : sections.length === 0 && search.length > 0 ? (
+          <View style={styles.emptyState}>
+            <Ionicons name="search-outline" size={44} color={Colors.border} />
+            <Text style={styles.emptyText}>{t('search.empty', { query: search })}</Text>
+          </View>
+        ) : (
+          sections.map(section => (
+            <View key={section.id} style={styles.sectionBlock}>
+              <Text style={styles.sectionTitle}>{section.title}</Text>
+              <HorizontalFadeScroll>
+                {section.data.map(item => (
+                  <DrinkCard
+                    key={item.id}
+                    item={item}
+                    navigation={navigation}
+                    sectionId={section.id}
+                    sectionIcon={section.icon}
+                  />
+                ))}
+              </HorizontalFadeScroll>
+            </View>
+          ))
+        )}
 
         <View style={styles.bottomPad} />
       </ScrollView>
@@ -120,6 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.screen,
+    paddingTop: 14,
     zIndex: 100,
   },
   pageTitle: {
@@ -153,6 +171,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 60,
+    gap: 12,
+  },
+  errorText: {
+    color: Colors.textSecondary,
+    textAlign: 'center',
+    fontSize: 14,
+    paddingHorizontal: Spacing.screen,
+  },
+  emptyState: {
+    alignItems: 'center',
+    paddingVertical: 60,
+    gap: 12,
+  },
+  emptyText: {
+    fontSize: 14,
+    color: Colors.textSecondary,
+    textAlign: 'center',
+    paddingHorizontal: Spacing.screen,
+  },
   sectionBlock: {
     marginTop: Spacing.md,
     marginBottom: Spacing.xs,
@@ -163,11 +204,6 @@ const styles = StyleSheet.create({
     color: Colors.textPrimary,
     paddingHorizontal: Spacing.screen,
     marginBottom: Spacing.sm,
-  },
-  cardsRow: {
-    paddingHorizontal: Spacing.screen,
-    gap: 12,
-    paddingBottom: 4,
   },
   bottomPad: {
     height: 24,
