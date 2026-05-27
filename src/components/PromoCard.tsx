@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, Platform } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Spacing, Radius, Colors } from '../theme';
 
@@ -17,11 +17,16 @@ export default function PromoCard() {
     <ImageBackground
       source={require('../../assets/Hof_22.jpg')}
       style={styles.card}
-      imageStyle={{ borderRadius: Radius.xl }}
+      imageStyle={{
+        borderRadius: Radius.xl,
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
+      }}
     >
       {/* Clean elegant dark overlay */}
       <View style={StyleSheet.absoluteFillObject} backgroundColor="rgba(0,0,0,0.45)" borderRadius={Radius.xl} />
-      
+
       <View style={styles.textBlock}>
         <View style={styles.badge}>
           <Text style={styles.badgeText}>{badge}</Text>
@@ -53,13 +58,33 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    maxWidth: 500,
-    alignSelf: 'center',
-    width: '100%',
+    ...Platform.select({
+      web: {
+        width: '96vw',
+        left: '50%',
+        marginLeft: '-48vw',
+        position: 'relative',
+        maxWidth: '96vw',
+      },
+      default: {
+        maxWidth: 500,
+        alignSelf: 'center',
+      },
+    }),
   },
   textBlock: {
     flex: 1,
     paddingRight: 8,
+    ...Platform.select({
+      web: {
+        maxWidth: 500,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '100%',
+        paddingLeft: 24,
+        paddingRight: 24,
+      },
+    }),
   },
   badge: {
     alignSelf: 'flex-start',
